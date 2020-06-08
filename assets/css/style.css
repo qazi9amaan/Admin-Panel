@@ -1,0 +1,125 @@
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 5.3%;
+    background-color: #e7e7e7;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+
+/* Position the content inside the overlay */
+
+.overlay-content {
+    position: relative;
+    top: 11%;
+    /* 25% from the top */
+    width: 100%;
+    /* 100% width */
+}
+
+.overlay .closebtn,
+.Activity_title,
+.orders-title {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    /* Display block instead of inline */
+    transition: 0.3s;
+    /* Transition effects on hover (color) */
+}
+
+.overlay .closebtn:hover,
+.overlay .closebtn:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 5px;
+    right: 45px;
+    font-size: 60px;
+}
+
+.overlay .Activity_title {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+}
+
+
+/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+
+@media screen and (max-height: 450px) {
+    .overlay a {
+        font-size: 20px
+    }
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+    .overlay .Activity_title span {
+        font-size: 20px;
+    }
+    .overlay-content {
+        top: 15%;
+    }
+}
+
+@media screen and (max-width:320px) {
+    .overlay {
+        top: 7.3%;
+    }
+    .overlay-content {
+        top: 15%;
+    }
+}
+
+@media screen and (max-width:480px) {
+    .overlay {
+        top: 7.3%;
+    }
+    .overlay-content {
+        top: 15%;
+    }
+}
+
+.notification_item i {
+    font-size: 14px;
+}
+
+.notification_item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.notification_item div {
+    margin-left: 6px;
+}
+
+.important-notification {
+    background-color: #28a745;
+    color: #fff !important;
+}
+
+.important-notification:hover {
+    background-color: #218838 !important;
+    color: #fff !important;
+}
+
+.panel-chart-white {
+    background: rgba(0, 123, 255, .12549);
+    color: rgba(0, 123, 255, 1)
+}
+
+.panel-chart-red {
+    background: rgba(72, 199, 116, .12849);
+    color: #28a745;
+    padding: 0px;
+}
