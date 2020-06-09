@@ -9,7 +9,7 @@ if(isset($_GET['deleteimages']))
     $images = explode(",",$_GET['images']);
     foreach ($images as &$image)
     {
-        $imageURL = '../uploads/'.$image;
+        $imageURL = '/var/www/html/admin/uploads/'.$image;
         
         if (file_exists($imageURL)) {
             unlink($imageURL);

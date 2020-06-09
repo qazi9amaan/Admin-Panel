@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
 
        // File upload configuration 
-    $targetDir = "uploads/"; 
+    $targetDir = "/var/www/html/admin/uploads/"; 
     $allowTypes = array('jpg','png','jpeg','gif'); 
      
     $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = ''; 

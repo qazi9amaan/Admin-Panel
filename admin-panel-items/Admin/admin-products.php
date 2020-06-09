@@ -60,7 +60,7 @@ $total_pages = $db->totalPages;
         </div>
         <div class="col-lg-6">
             <div class="page-action-links text-right">
-                <a href="add_product.php?operation=create" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Add new</a>
+                <a href="../Products/add_product.php?operation=create" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Add new</a>
             </div>
         </div>
     </div>
