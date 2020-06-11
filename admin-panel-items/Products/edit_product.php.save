@@ -1,0 +1,152 @@
+<?php
+session_start();
+require_once '/var/www/html/admin/config/config.php';
+require_once BASE_PATH . '/includes/auth_validate.php';
+
+// Sanitize if you want
+$customer_id = filter_input(INPUT_GET, 'product_id', FILTER_VALIDATE_INT);
+$operation = filter_input(INPUT_GET, 'operation', FILTER_SANITIZE_STRING); 
+($operation == 'edit') ? $edit = true : $edit = false;
+$db = getDbInstance();
+
+// Handle update request. As the form's action attribute is set to the same script, but 'POST' method, 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
+    // Get customer id form query string parameter.
+    $customer_id = filter_input(INPUT_GET, 'product_id', FILTER_SANITIZE_STRING);
+
+    // Get input data
+    $data_to_db = filter_input_array(INPUT_POST);
+
+
+        
+     
+
+
+    // Insert user and timestamp
+    $data_to_db['updated_by'] = $_SESSION['user_id'];
+    $data_to_db['updated_at'] = date('Y-m-d H:i:s');
+
+    $db = getDbInstance();
+    $db->where('id', $customer_id);
+    $stat = $db->update('products', $data_to_db);
+
+    if ($stat)
+    {
+
+       // File upload configuration 
+       $targetDir = "/var/www/html/admin/uploads/"; 
+       $allowTypes = array('jpg','png','jpeg','gif'); 
+        
+       $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = ''; 
+       $fileNames = array_filter($_FILES['files']['name']); 
+       if(!empty($fileNames)){ 
+           foreach($_FILES['files']['name'] as $key=>$val){ 
+               // File upload path 
+               $fileName = basename($_FILES['files']['name'][$key]); 
+               $targetFilePath = $targetDir . $fileName; 
+                
+               // Check whether file type is valid 
+               $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
+               if(in_array($fileType, $allowTypes)){ 
+                   // Upload file to server 
+                   if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){ 
+                       // Image db insert sql 
+                       $insertValuesSQL .= "".$fileName.","; 
+                   }else{ 
+                       $errorUpload .= $_FILES['files']['name'][$key].' | '; 
+                   } 
+               }else{ 
+                   $errorUploadType .= $_FILES['files']['name'][$key].' | '; 
+               } 
+           } 
+            
+           if(!empty($insertValuesSQL)){ 
+               $insertValuesSQL = trim($insertValuesSQL, ','); 
+               $data_to_db['file_name'] = $insertValuesSQL;
+               $stat = $db->update('products', $data_to_db);
+               $_SESSION['success'] = 'Product updated successfully!';
+
+
+           } 
+           }
+
+        $_SESSION['success'] = 'Product updated successfully!';
+        // Redirect to the listing page
+        header('Location: products.php');
+        // Important! Don't execute the rest put the exit/die.
+        exit();
+    }
+}
+
+// If edit variable is set, we are performing the update operation.
+if ($edit)
+{
+    $db->where('id', $customer_id);
+    // Get data to pre-populate the form.
+    $customer = $db->getOne('products');
+}
+?>
+<?php include BASE_PATH.'/includes/header.php'; ?>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Update Product</h2>
+        </div>
+    </div>
+    <!-- Flash messages -->
+    <?php include BASE_PATH.'/includes/flash_messages.php'; ?>
+    <form class="form" action="" method="post" id="product_form" enctype="multipart/form-data">
+        <input value="<?php echo <!DOCTYPE HTML>
+<html data-bgs="gainsboro" class="session_login">
+<head>
+ <noscript> <style> html[data-bgs="gainsboro"] { background-color: #d6d6d6; } html[data-bgs="nightRider"] { background-color: #1a1c20; } html[data-bgs="nightRider"] div[data-noscript] { color: #979ba080; } html[data-slider-fixed='1'] { margin-right: 0 !important; } body > div[data-noscript] ~ * { display: none !important; } div[data-noscript] { visibility: hidden; animation: 2s noscript-fadein; animation-delay: 1s; text-align: center; animation-fill-mode: forwards; } @keyframes noscript-fadein { 0% { opacity: 0; } 100% { visibility: visible; opacity: 1; } } </style> <div data-noscript> <div class="fa fa-3x fa-exclamation-triangle margined-top-20 text-danger"></div> <h2>JavaScript is disabled</h2> <p>Please enable javascript and refresh the page</p> </div> </noscript>
+<meta charset="utf-8">
+ <link data-link-ref rel="apple-touch-icon" sizes="180x180" href="/images/favicons/webmin/apple-touch-icon.png">
+ <link data-link-ref rel="icon" type="image/png" sizes="32x32" href="/images/favicons/webmin/favicon-32x32.png">
+ <link data-link-ref rel="icon" type="image/png" sizes="192x192" href="/images/favicons/webmin/android-chrome-192x192.png">
+ <link data-link-ref rel="icon" type="image/png" sizes="16x16" href="/images/favicons/webmin/favicon-16x16.png">
+ <link data-link-ref crossorigin="use-credentials" rel="manifest" href="/images/favicons/webmin/manifest.json">
+ <link data-link-ref rel="mask-icon" href="/images/favicons/webmin/safari-pinned-tab.svg" color="">
+ <meta name="msapplication-TileColor" content="">
+ <meta data-link-ref name="msapplication-TileImage" content="/images/favicons/webmin/mstile-144x144.png">
+ <meta name="theme-color" content="">
+<title>Login to Webmin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/unauthenticated/css/bundle.min.css?19459999999999900" rel="stylesheet">
+<script>document.addEventListener("DOMContentLoaded", function(event) {var a=document.querySelectorAll('input[type="password"]');i=0;
+for(length=a.length;i<length;i++){var b=document.createElement("span"),d=30<a[i].offsetHeight?1:0;b.classList.add("input_warning_caps");b.setAttribute("title","Caps Lock");d&&b.classList.add("large");a[i].classList.add("use_input_warning_caps");a[i].parentNode.insertBefore(b,a[i].nextSibling);a[i].addEventListener("blur",function(){this.nextSibling.classList.remove("visible")});a[i].addEventListener("keydown",function(c){"function"===typeof c.getModifierState&&((state=20===c.keyCode?!c.getModifierState("CapsLock"):
+c.getModifierState("CapsLock"))?this.nextSibling.classList.add("visible"):this.nextSibling.classList.remove("visible"))})};});function spinner() {var x = document.querySelector('.fa-sign-in:not(.invisible)'),s = '<span class="cspinner_container"><span class="cspinner"><span class="cspinner-icon white small"></span></span></span>';if(x){x.classList.add("invisible"); x.insertAdjacentHTML('afterend', s);x.parentNode.classList.add("disabled");x.parentNode.disabled=true}}setTimeout(function(){if(navigator&&navigator.oscpu){var t=navigator.oscpu,i=document.querySelector("html"),e="data-platform";t.indexOf("Linux")>-1?i.setAttribute(e,"linux"):t.indexOf("Windows")>-1&&i.setAttribute(e,"windows")}});</script> <link href="/unauthenticated/css/fonts-roboto.min.css?19459999999999900" rel="stylesheet">
+</head>
+<body class="session_login" >
+<div class="container session_login" data-dcontainer="1">
+<div class="alert alert-warning">
+<strong><i class ="fa fa-exclamation-triangle"></i> Warning!</strong><br />
+<span>Login failed. Please try again.</span>
+</div>
+
+<form method="post" target="_top" action="/session_login.cgi" class="form-signin session_login clearfix" role="form" onsubmit="spinner()">
+<i class="wbm-webmin"></i><h2 class="form-signin-heading">
+     <span>Webmin</span></h2>
+<p class="form-signin-paragraph">You must enter a username and password to login to the server on<strong> 13.126.80.19</strong></p>
+<div class="input-group form-group">
+<span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+<input type="text" class="form-control session_login" name="user" autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Username" autofocus>
+</div>
+<div class="input-group form-group">
+<span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+<input type="password" class="form-control session_login" name="pass" autocomplete="off" autocorrect="off" placeholder="Password">
+</div>
+<div class="input-group form-group">
+            <span class="awcheckbox awobject"><input class="iawobject" name="save" value="1" id="save" type="checkbox"> <label class="lawobject" for="save">Remember me</label></span>
+         </div>
+<div class="form-group form-signin-group"><button class="btn btn-primary" type="submit"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;Sign in</button>
+</div></form>
+</div>
+</body>
+</html>
+ ?>" hidden name="id"  ?>
+	<?php include BASE_PATH.'/forms/product_form.php'; ?>
+    </form>
+</div>
+<?php include BASE_PATH.'/includes/footer.php'; ?>

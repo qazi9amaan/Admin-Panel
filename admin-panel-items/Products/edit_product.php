@@ -13,7 +13,6 @@ $db = getDbInstance();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') 
 {
     // Get customer id form query string parameter.
-    $customer_id = filter_input(INPUT_GET, 'product_id', FILTER_SANITIZE_STRING);
 
     // Get input data
     $data_to_db = filter_input_array(INPUT_POST);
@@ -96,8 +95,8 @@ if ($edit)
     </div>
     <!-- Flash messages -->
     <?php include BASE_PATH.'/includes/flash_messages.php'; ?>
-    <form class="form" action="" method="post" id="product_form" enctype="multipart/form-data">
-        <?php include BASE_PATH.'/forms/product_form.php'; ?>
+    <form class="form" method="post" id="product_form" enctype="multipart/form-data">
+	 <?php include BASE_PATH.'/forms/product_form.php'; ?>
     </form>
 </div>
 <?php include BASE_PATH.'/includes/footer.php'; ?>

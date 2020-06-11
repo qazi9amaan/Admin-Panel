@@ -125,7 +125,7 @@ $total_pages = $db->totalPages;
                 <td><?php echo htmlspecialchars($row['product_discount_price']); ?></td>
                 <td><?php echo htmlspecialchars($row['product_quality']); ?></td>
                 <td>
-                    <a href="/admin/edit_product.php?product_id=<?php echo $row['id']; ?>&operation=edit" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="/admin/admin-panel-items/Products/edit_product.php?product_id=<?php echo $row['id']; ?>&operation=edit" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
                     <a href="#"  class="btn btn-danger delete_btn" data-toggle="modal" data-target="#confirm-delete-<?php echo $row['id']; ?>"><i class="glyphicon glyphicon-trash"></i></a>
                 </td>
             </tr>
