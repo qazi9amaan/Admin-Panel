@@ -4,7 +4,7 @@
 
 //if user is Not Logged in, redirect to login.php page.
 if (!isset($_SESSION['admin_user_logged_in'])) {
-	header('Location:login.php');
+	header('Location:/admin/login.php');
 }
 
  ?>

@@ -13,8 +13,9 @@ $numAdminProducts = $db->where('product_belongs_to','owner')->getValue ("product
 $numCategories = $db->getValue ("categories", "count(*)");
 $numDeliveredOrders = $db->where('orders.order_status', 'delivered')->join("products", "orders.product_id=products.id", "INNER")->getValue ("orders", "count(*)");
 $numNewOrders = $db->where('orders.order_status', 'confirming')->where('products.product_belongs_to', 'owner')->join("products", "orders.product_id=products.id", "INNER")->getValue ("orders", "count(*)");
-$rejectedOrders =$db->where('orders.order_status', 'rejected')->join("products", "orders.product_id=products.id", "INNER")->getValue ("orders", "count(*)");
-$acceptedOrders =$db->where('orders.order_status', 'accepted')->join("products", "orders.product_id=products.id", "INNER")->getValue ("orders", "count(*)");
+$rejectedOrders =$db->where('orders.order_status', 'rejected')->getValue ("orders", "count(*)");
+$acceptedOrders =$db->where('orders.order_status', 'accepted')->getValue ("orders", "count(*)");
+$deliveringOrders =$db->where('orders.order_status', 'delivering')->getValue ("orders", "count(*)");
 
 
 $numAssociates = $db->getValue ("associate_accounts", "count(*)");
@@ -266,7 +267,7 @@ include_once('includes/notification_drawer.php');
                             <i class="fa fa-thumbs-up fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $acceptedOrders;  ?></div>
+                            <div class="huge"><?php echo $deliveringOrders;  ?></div>
                             <div>Orders to be delivered / Approved </div>
                         </div>
                     </div>

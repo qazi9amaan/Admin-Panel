@@ -61,6 +61,8 @@
 
     <div class="form-group text-center">
         <label></label>
-        <button type="submit" class="btn btn-success" >Upload </button>
+        <button id="upload_btn_product" type="submit" class="btn btn-success" >Upload </button>
     </div>
 </fieldset>
+                                                     
+

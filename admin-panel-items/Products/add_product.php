@@ -57,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $data_to_db['created_by'] = $_SESSION['user_id'];
     $data_to_db['created_at'] = date('Y-m-d');
     $data_to_db['file_name'] = $insertValuesSQL;
-    $data_to_db['product_desc'] = mysqli_real_escape_string($conn,$_POST['product_desc'] );
     $data_to_db['product_belongs_to'] = "owner";
 
     $db = getDbInstance();

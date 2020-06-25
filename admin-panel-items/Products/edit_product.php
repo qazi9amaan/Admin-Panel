@@ -17,11 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     // Get input data
     $data_to_db = filter_input_array(INPUT_POST);
 
-
-        
-     
-
-
     // Insert user and timestamp
     $data_to_db['updated_by'] = $_SESSION['user_id'];
     $data_to_db['updated_at'] = date('Y-m-d H:i:s');
@@ -63,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
            if(!empty($insertValuesSQL)){ 
                $insertValuesSQL = trim($insertValuesSQL, ','); 
                $data_to_db['file_name'] = $insertValuesSQL;
+               $db->where('id', $customer_id);
                $stat = $db->update('products', $data_to_db);
                $_SESSION['success'] = 'Product updated successfully!';
 

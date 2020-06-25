@@ -45,7 +45,7 @@ if ($order_dir) {
 // Set pagination limit
 $db->pageLimit = $pagelimit;
 $db->where('o.order_status', 'delivering');
-$db->join("products p", "o.product_id=p.id", "INNER");
+$db->join("products p", "p.id=o.product_id", "INNER");
 $db->join("user_profiles u", "u.user=o.user_id", "INNER");
 
 // Get result of the query

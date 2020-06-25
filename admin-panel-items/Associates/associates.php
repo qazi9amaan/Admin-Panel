@@ -105,11 +105,11 @@ $total_pages = $db->totalPages;
             <tr>
                 <th width="5%">ID</th>
                 <th width="15%">Owner Name</th>
-                <th width="20%">Bussiness Name</th>
+                <th width="15%">Bussiness Name</th>
                 <th width="30%"> Address</th>
                 <th width="7%"> Email</th>
                 <th width="8%">Phone</th>
-                <th width="15%">Actions</th>
+                <th width="20%">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -131,8 +131,42 @@ $total_pages = $db->totalPages;
                         <a href="#" class="btn  btn-danger"data-toggle="modal" data-target="#block-account-<?php echo $row['id']; ?>"><i class="fa fa-ban"></i></a>
                         <?php }?>
                     <a href="#"  class="btn btn-danger delete_btn" data-toggle="modal" data-target="#confirm-delete-<?php echo $row['id']; ?>"><i class="glyphicon glyphicon-trash"></i></a>
+                                    <a href="#"  class="btn btn-warning" data-toggle="modal" data-target="#change-password-<?php echo $row['id']; ?>"><i class="fa fa-lock"></i></a>
+                  
+
                 </td>
             </tr>
+        
+        
+            <div class="modal fade" id="change-password-<?php echo $row['id']; ?>" role="dialog">
+                <div class="modal-dialog modal-dialog-centered">
+                    <form action="update_associate_password.php" method="POST">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Reset Password</h4>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="id" id="id" value="<?php echo $row['id']; ?>">
+                                <p>Are you sure you want to reset the associate's password? The default password 
+                                is <strong> B#BeFEK4</strong> please ask the assocaite to change it once they get access. </p>
+
+                                <div class="form-row">
+                                    <label for="password">Default Password</label>
+                                    <input type="text" class="form-control" diabled value="B#BeFEK4">
+                                </div>
+                                <br>
+                                <p class="mt-4"><strong>Disclaimer!</strong> Dear admin the password will be changed to the default strong password. Please dont try to change it!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit"  class="btn btn-default pull-left">Reset Password</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <!-- Delete Confirmation Modal -->
             <div class="modal fade" id="confirm-delete-<?php echo $row['id']; ?>" role="dialog">
                 <div class="modal-dialog">
