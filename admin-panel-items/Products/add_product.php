@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     if(!empty($fileNames)){ 
         foreach($_FILES['files']['name'] as $key=>$val){ 
             // File upload path 
-            $fileName = uniqid().'-'.substr(basename($_FILES['files']['name'][$key]),0,25); 
+            $fileName = uniqid().'-'.substr(basename($_FILES['files']['name'][$key]),0,10); 
             $targetFilePath = $targetDir . $fileName; 
              
             // Check whether file type is valid 
