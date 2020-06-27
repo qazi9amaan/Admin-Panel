@@ -132,16 +132,17 @@ function calculate_other_pices(id,com, price)
     <table class="table table-striped table-bordered table-condensed">
         <thead>
             <tr>
-                <th width="5%">ID</th>
-                <th width="15%">Associate</th>
-                <th width="18%">Product Name</th>
-                <th width="8%"> Category</th>
-                <th width="5%">Quality</th>
-                <th width="8%"> Actual Price</th>
-                <th width="5%"> Commission</th>
-                <th width="8%"> Selling Price</th>
-                <th class=" width="8%"> Raised Price</th>
-                <th width="10%">Actions</th>
+                <th >ID</th>
+                <th >Associate</th>
+                <th>Product Name</th>
+                <th > Category</th>
+                <th >Quality</th>
+                <th > Actual Price</th>
+                <th > Commission</th>
+                <th > Selling Price</th>
+                <th > Raised Price</th>                 
+ 					<th > Picture</th>
+                <th >Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -159,6 +160,8 @@ function calculate_other_pices(id,com, price)
                 <td data-id="c" class="raise-price" id="raised-price-<?php echo $row['id']; ?>" contenteditable="true" class="raised-show"></td>
 
                 </td>
+    
+    <td> <?php echo $row['file_name'] == 'null'? '<span class="badge badge-pill badge-danger">Not Uploaded</span>' :'<span class="badge badge-pill bg-danger text-white badge-success">Uploaded</span>' ; ?> </td>
                 <script>
                 $('.commission-show').html($('#commission-price').val());
                 calculate_final(<?php echo $row['id']; ?>,parseInt($('#com-<?php echo $row['id']; ?>').html()), <?php echo $row['product_price']; ?>);
