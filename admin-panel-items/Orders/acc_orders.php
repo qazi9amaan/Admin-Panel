@@ -174,10 +174,11 @@ $total_pages = $db->totalPages;
                                     <Label>Product</Label>
                                     <input type="text" disabled class="form-control" value="<?php echo htmlspecialchars($row['product_name']); ?>">
                                 </div>
-                                <div class="form-group">
-                                    <Label>Quality</Label>
-                                    <input type="text" disabled class="form-control" value="<?php echo htmlspecialchars($row['product_quality']); ?>">
-                                </div>
+                               
+                            	 <div class="form-check">
+    									<input type="checkbox" name="allow_cod" checked class="form-check-input" id="cod">
+   										 <label class="form-check-label" for="cod">AVAILABLE ON COD </label>
+  								</div>
                                 <p>Are you sure you want to accept this order? Reverting this back may cause an experience glitch to users.</p>
 
                             </div>

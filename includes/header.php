@@ -95,9 +95,11 @@ shopping cart,e business,what is ecommerce,ecomerce,Fashion,Kashmir ecom,Brooks,
                                     </ul>
                                 </li>
 
-                                <li<?php echo (CURRENT_PAGE == 'products.php' || CURRENT_PAGE == 'add_product.php?operation=create') ? ' class="active"' : ''; ?>>
+                                <li<?php echo (CURRENT_PAGE == 'products.php' || CURRENT_PAGE == 'associate_products_stat.php' || CURRENT_PAGE == 'add_product.php?operation=create') ? ' class="active"' : ''; ?>>
                                     <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> Products<i class="fa arrow"></i></a>
+
                                     <ul class="nav nav-second-level">
+                                        <li>                                    <a href="/admin/admin-panel-items/Associates/Statistics/associate_products_stat.php"><i class="fa fa-line-chart fa-fw"></i> Stats<i class="fa arrow"></i></a></li>
                                         <li><a href="/admin/admin-panel-items/Products/products.php"><i class="fa fa-list fa-fw"></i> List all</a></li>
                                         <li><a href="/admin/admin-panel-items/Products/add_product.php"><i class="fa fa-plus fa-fw"></i> Add New</a></li>
                                     </ul>
