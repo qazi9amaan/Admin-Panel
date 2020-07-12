@@ -1,4 +1,5 @@
 <?php
+header('Location:delivering_orders.php');
 session_start();
 require_once '/var/www/html/admin/config/config.php';
 require_once BASE_PATH . '/includes/auth_validate.php';

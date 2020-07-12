@@ -1,4 +1,3 @@
-
 <?php 
  require_once '/var/www/html/admin/config/config.php';
  require_once BASE_PATH . '/includes/auth_validate.php';
@@ -13,13 +12,13 @@ $data_approved_orders = array();
  $categories = array();
  foreach ($result as $row):
     switch($row['order_status']){
-      case "confirming":
+      case "rejected":
         $data_new_orders[] =$row['count(*)'];
         $data_accepted_orders[] =0;
         $data_delivered_orders[] =0;
 
       break;
-      case "accepted":
+      case "delivered":
         $data_accepted_orders[] =$row['count(*)'];
         $data_new_orders[]=0;
         $data_delivered_orders[]=0;
@@ -41,7 +40,7 @@ $data_assocaite_orders = 0;
 
 
 $db2 = getDbInstance();
-$orders_accepted =  $db2->where('order_status','accepted')->getValue('orders','count(*)');
+$orders_accepted =  $db2->where('order_status','rejected')->getValue('orders','count(*)');
 $orders_delievered =  $db2->where('order_status','delivered')->getValue('orders','count(*)');
 $orders_delivering =  $db2->where('order_status','delivering')->getValue('orders','count(*)');
 
@@ -58,7 +57,7 @@ $data_customers  = array();
 $data_associates  = array();
 $data_orders_trend  = array();
 
-for ($x = 0; $x <= 11; $x++) {
+for ($x = 0; $x < 12; $x++) {
   $data_customers[$x] =0;
   $data_associates[$x] =0;
   $data_orders_trend[$x] =0;
@@ -112,7 +111,7 @@ endforeach;
               }
             }
           },
-          labels: ['Admin', 'Associate', 'Accepted','Delivered','Approved'],
+          labels: ['Admin', 'Associate', 'Rejected','Delivered','Delivering'],
         };
         var chart = new ApexCharts(document.querySelector("#customers_chart"), options);
         chart.render();
@@ -122,14 +121,14 @@ endforeach;
             series: [
           {
             name: 'New Orders',
-            data: <?php echo json_encode($data_new_orders) ;?>
+            data: <?php echo json_encode($data_approved_orders) ;?>
           },
           {
-            name: 'Accepted',
+            name: 'Delivered Orders',
             data: <?php echo json_encode($data_accepted_orders) ;?>
           },{
-            name: 'Approved',
-            data: <?php echo json_encode($data_approved_orders) ;?>
+            name: 'Rejected Orders',
+            data: <?php echo json_encode($data_new_orders) ;?>
           }
           
           ],
@@ -141,25 +140,27 @@ endforeach;
             enabled: false
           },
           stroke: {
-            dashArray: [0, 4, 3],
             curve: 'smooth'
           },
           xaxis: {
-            type: 'datetime',
+            type: 'date',
             categories: <?php echo json_encode($categories) ;?>,
-            format: undefined,
-            formatter: undefined,
-            datetimeUTC: true,
-            datetimeFormatter: {
+            format: {
                 year: 'yyyy',
                 month: "MMM 'yy",
                 day: 'dd MMM',
-                hour: 'HH:mm',
+            },
+            formatter: undefined,
+            dateUTC: true,
+            dateFormatter: {
+                year: 'yyyy',
+                month: "MMM 'yy",
+                day: 'dd MMM',
             },
           },
           tooltip: {
             x: {
-              format: 'dd/MM/yy HH:mm'
+              format: 'dd-MMM-yy '
             },
           },
         };

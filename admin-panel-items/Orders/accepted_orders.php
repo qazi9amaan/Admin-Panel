@@ -1,4 +1,7 @@
 <?php
+
+
+
 session_start();
 require_once '/var/www/html/admin/config/config.php';
 require_once BASE_PATH . '/includes/auth_validate.php';
@@ -58,7 +61,9 @@ $total_pages = $db->totalPages;
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-6">
-        <h1 class="page-header">Accepted orders | Ongoing orders</h1>
+        <h1 class="page-header">Waiting Orders <small class="text-muted">NO PAYMENT</small>
+</h1>
+
         </div>
         <div class="col-lg-6">
             <div class="page-action-links text-right">
@@ -114,8 +119,6 @@ $total_pages = $db->totalPages;
                 <th width="8%"> Price</th>
                 <th width="8%"> Payment Type</th>
                 <th width="9%"> Ordered At</th>
-                <th width="8%">Status</th>
-                <th width="10%">Accepted On</th>
 
                 <th width="8%">Actions</th>
             </tr>
@@ -144,8 +147,7 @@ $total_pages = $db->totalPages;
                 <td><?php echo htmlspecialchars($row['amount']); ?></td>
                 <td><?php echo htmlspecialchars($row['payment_type']); ?></td>
                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
-                <td><?php echo htmlspecialchars($row['order_status']); ?></td>
-                <td><?php echo htmlspecialchars($row['order_updated_on']); ?></td>
+             
 
                 <td>
                     <a href="#"  class="btn btn-danger " data-toggle="modal" data-target="#confirm-cancel-<?php echo $row['order_id']; ?>"><i class="fa fa-times"></i></a>

@@ -128,14 +128,16 @@ shopping cart,e business,what is ecommerce,ecomerce,Fashion,Kashmir ecom,Brooks,
                                             </li>
                                         </ul>
                                 </li>
-                                <li<?php echo (CURRENT_PAGE == 'orders.php' || CURRENT_PAGE == 'acc_orders.php' ||CURRENT_PAGE == 'delivering_orders.php' ||CURRENT_PAGE == 'accepted_orders.php'||CURRENT_PAGE == 'rejected_orders.php'||CURRENT_PAGE == 'delivered_orders.php' ) ? ' class="active"' : ''; ?>>
+                                <li<?php echo (CURRENT_PAGE == 'orders.php' || CURRENT_PAGE == 'acc_orders.php' ||CURRENT_PAGE == 'delivering_orders.php' ||CURRENT_PAGE == 'accepted_orders.php'||CURRENT_PAGE == 'rejected_orders.php' ||CURRENT_PAGE == 'confirm_payment.php' ||CURRENT_PAGE == 'delivered_orders.php' ) ? ' class="active"' : ''; ?>>
                                         <a href="#"><i class="fa fa-shopping-bag fa-fw"></i> Orders<i class="fa arrow"></i></a>
                                         <ul class="nav nav-second-level">
-                                            <li><a href="/admin/admin-panel-items/Orders/orders.php"><i class="fa fa-user fa-fw"></i> Admin Orders</a></li>
+<!--                                             <li><a href="/admin/admin-panel-items/Orders/orders.php"><i class="fa fa-user fa-fw"></i> Admin Orders</a></li>
                                             <li><a href="/admin/admin-panel-items/Orders/acc_orders.php"><i class="fa  fa-handshake-o fa-fw"></i> Associate Orders</a></li>
-                                            <li><a href="/admin/admin-panel-items/Orders/accepted_orders.php"><i class="fa  fa-check fa-fw"></i>  Accepted Orders</a></li>
-                                            <li><a href="/admin/admin-panel-items/Orders/rejected_orders.php"><i class="fa  fa-remove fa-fw"></i> Rejected Orders</a></li>
+                                             -->
                                             <li><a href="/admin/admin-panel-items/Orders/delivering_orders.php"><i class="fa fa-thumbs-up fa-fw"></i> Orders to be delivered</a></li>
+                                            <li><a href="/admin/admin-panel-items/Orders/confirm_payment.php"><i class="fa fa-rupee fa-fw"></i> Confirm Payment</a></li>
+                                        <li><a href="/admin/admin-panel-items/Orders/accepted_orders.php"><i class="fa  fa-warning fa-fw"></i>  Waiting Orders</a></li>
+                                                                                    <li><a href="/admin/admin-panel-items/Orders/rejected_orders.php"><i class="fa  fa-remove fa-fw"></i> Rejected Orders</a></li>
                                             <li><a href="/admin/admin-panel-items/Orders/delivered_orders.php"><i class="fa  fa-truck fa-fw"></i> Delievered Orders</a></li>
 
 

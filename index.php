@@ -16,6 +16,7 @@ $numNewOrders = $db->where('orders.order_status', 'confirming')->where('products
 $rejectedOrders =$db->where('orders.order_status', 'rejected')->getValue ("orders", "count(*)");
 $acceptedOrders =$db->where('orders.order_status', 'accepted')->getValue ("orders", "count(*)");
 $deliveringOrders =$db->where('orders.order_status', 'delivering')->getValue ("orders", "count(*)");
+$PaymentConfirmingOrders =$db->where('orders.order_status', 'confirming-payment')->getValue ("orders", "count(*)");
 
 
 $numAssociates = $db->getValue ("associate_accounts", "count(*)");
@@ -181,85 +182,55 @@ include_once('includes/notification_drawer.php');
             </div>
         </div>
     </div>
-    
     <div class="row">
-        
-       
-        <div class="col-lg-4 col-md-6">
-        <div class="panel panel-yellow">
+    
+        <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-5x"></i>
+                            <i class="fa fa-line-chart  fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $numNewOrders;  ?></div>
-                            <div>New Orders</div>
+                            <div class="huge">.</div>
+                            <div>Product Statistics</div>
                         </div>
                     </div>
                 </div>
-                <a href="admin-panel-items/Orders/orders.php">
+                <a href="/admin/admin-panel-items/Associates/Statistics/associate_products_stat.php">
                     <div class="panel-footer">
-                        <span class="pull-left">View New Orders</span>
+                        <span class="pull-left">View Product Stats</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>
                 </a>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
-        <div class="panel panel-green">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-hourglass-half fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $acceptedOrders;  ?></div>
-                            <div>Accepted Orders</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="/admin/admin-panel-items/Orders/accepted_orders.php">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-
-     
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-remove fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $rejectedOrders;  ?></div>
-                            <div>Rejected Orders</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="/admin/admin-panel-items/Orders/rejected_orders.php">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-     
 
     </div>
-    <!-- /.ROW -->
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+    <div class="panel panel-grey">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-bag fa-5x"></i>
+
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">.</div>
+                            <div>Orders</div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    </div></div>
+    <!-- ROW-->
 
     <div class="row">
-        <div class="col-lg-3 col-md-6">
+        
+         
+    <div class="col-lg-3 col-md-6">
             <div class="panel panel-green">
                 <div class="panel-heading">
                     <div class="row">
@@ -268,13 +239,58 @@ include_once('includes/notification_drawer.php');
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge"><?php echo $deliveringOrders;  ?></div>
-                            <div>Orders to be delivered / Approved </div>
+                            <div> New Orders</div>
                         </div>
                     </div>
                 </div>
                 <a href="/admin/admin-panel-items/Orders/delivering_orders.php">
                     <div class="panel-footer">
+                        <span class="pull-left">Orders to be delivered / Approved</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+      <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-rupee fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $PaymentConfirmingOrders;  ?></div>
+                            <div>Confirm Payment</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/admin/admin-panel-items/Orders/confirm_payment.php">
+                    <div class="panel-footer">
                         <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+      
+     <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-warning fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $acceptedOrders;  ?></div>
+                            <div>Waiting Orders</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/admin/admin-panel-items/Orders/accepted_orders.php">
+                    <div class="panel-footer">
+                        <span class="pull-left">Orders without payment</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>
@@ -303,30 +319,34 @@ include_once('includes/notification_drawer.php');
                 </a>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-        <div class="panel panel-red">
+    
+      <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-line-chart  fa-5x"></i>
+                            <i class="fa fa-remove fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">.</div>
-                            <div>Product Statistics</div>
+                            <div class="huge"><?php echo $rejectedOrders;  ?></div>
+                            <div>Rejected Orders</div>
                         </div>
                     </div>
                 </div>
-                <a href="/admin/admin-panel-items/Associates/Statistics/associate_products_stat.php">
+                <a href="/admin/admin-panel-items/Orders/rejected_orders.php">
                     <div class="panel-footer">
-                        <span class="pull-left">View Product Stats</span>
+                        <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>
                 </a>
             </div>
         </div>
-
+    
     </div>
+    <!-- /.ROW -->
+
+    
     <!-- /.row -->
 <div class="row">
     <div class="col-lg-12 col-md-12">
@@ -439,34 +459,7 @@ include_once('includes/notification_drawer.php');
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-4 col-md-12">
-        <div class="panel panel-yellow">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart  fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $numAssociatesorders; ?></div>
-                            <div>New Orders</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="/admin/admin-panel-items/Orders/acc_orders.php">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        
-        
-        
-      
-    </div>
+
     <!-- /.ROW -->
   
 

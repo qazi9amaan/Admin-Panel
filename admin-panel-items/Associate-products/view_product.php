@@ -13,11 +13,12 @@ $db = getDbInstance();
 if ($edit)
 {
     $db->where('id', $product_id);
-    // Get data to pre-populate the form.
     $product = $db->getOne('associate_products');
 }
+$p=$product;
 ?>
 <?php include BASE_PATH.'/includes/header.php'; ?>
+<?php $product = $p;?>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">

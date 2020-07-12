@@ -10,8 +10,8 @@ if ($del_id && $_SERVER['REQUEST_METHOD'] == 'POST')
     $customer_id = $del_id;
 
     $db = getDbInstance();
-    $db->where('id', $customer_id);
-    $status = $db->delete('auth_user_account');
+    $db->where('user', $customer_id);
+    $status = $db->delete('user_profiles');
     
     if ($status) 
     {

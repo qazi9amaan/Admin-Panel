@@ -96,39 +96,39 @@ if(isset($_POST['changepaymenttocod']))
     $stat = $db->update('orders', $data_to_db);
     if($stat)
     {
+         $_SESSION['completed-payment_order_id']=$order_id; 
+		 $db = getDbInstance();
+    	 $data['notification_type']='delivering';
+        $db->where('order_id',$order_id)->update('order_notifcations',$data);
+         
         echo 'success';
     }else{
+        $_SESSION['completed-payment_order_id']=$order_id; 
+
         echo 'failure';
     }
 }
 
 if(isset($_POST['changepaymenttoonline']))
 {
+    
     $order_id= $_POST['order_id'];    
-    $data_to_db['order_status'] = 'delivering';
-    $data_to_db['payment_type'] = 'Online';
-    $data_to_db['payment_id'] = $_POST['payment_id'];
-
+    $data_to_db['order_status'] = 'confirming-payment';
+    $data_to_db['payment_type'] = 'Online Payment';
     $db = getDbInstance();
     $db->where('order_id', $order_id);
     $stat = $db->update('orders', $data_to_db);
     if($stat)
     {
-        $db = getDbInstance();
-        $db->where('order_id', $order_id);
-        $order= $db->getOne('orders');
-
-        $notification['notification_type']="user_approved_order";
-        $notification['owner']= $order["owner"];
-        $notification['order_id']=$order_id;
-        $notification['product_id']=$order["product_id"];
-        $notification['user_id']=$order["user_id"];
-        $last_id = $db->insert('order_notifcations', $notification);
-        if($last_id){
-            echo 'success';
-        }
-
+    	 $db = getDbInstance();
+    	 $data['notification_type']='confirming-payment';
+        $db->where('order_id',$order_id)->update('order_notifcations',$data);
+         $_SESSION['completed-payment_order_id']=$order_id; 
+ 
+        echo 'success';
     }else{
+        $_SESSION['completed-payment_order_id']=$order_id; 
+
         echo 'failure';
     }
 }

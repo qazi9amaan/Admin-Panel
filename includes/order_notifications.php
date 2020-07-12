@@ -1,4 +1,3 @@
-
 <div class="container-fluid">
             <h3 class="orders-title">Orders</h3>
             <div class="list-group">
@@ -9,18 +8,53 @@
 
                     switch($order['notification_type']){
 
-                        case "new_order":
+                        case "confirming-payment":
                             $product = $db2->where('id',$order['product_id'])->getOne("products");
                             $name= $db2->where('user',$order['user_id'])->getOne("user_profiles");
 
                             if($order['owner']== NULL)
                             {
-                                $link ='/admin/admin-panel-items/Orders/orders.php';
-                                $msg =  "<strong>" .$name['full_name'].'</strong> wants to buy your product <strong>'.$product['product_name']."</strong>";
+                                $link ='/admin/admin-panel-items/Orders/confirm_payment.php';
+                                $msg =  "<strong>" .$name['full_name'].'</strong> brought your product <strong>'.$product['product_name']."</strong>, please confirm his payment?";
                             }else{
                                 $assocaite = $db2->where('id',$order['owner'])->getValue("associate_accounts","bussiness_name");
-                                $msg =  "<strong>" .$name['full_name'].'</strong> wants to buy a product <strong>'.$product['product_name']."</strong> from <strong> $assocaite </strong>";
-                                $link ='/admin/admin-panel-items/Orders/acc_orders.php';
+                                $msg =  "<strong>" .$name['full_name'].'</strong> wants to buy a product <strong>'.$product['product_name']."</strong> from <strong> $assocaite </strong> please confirm his payment?";
+                                $link ='/admin/admin-panel-items/Orders/confirm_payment.php';
+
+                            }
+                            $icon ='fa fa-shopping-cart fa-fw';
+                            $class="";
+                            break;
+                       
+                    case "delivering":
+                            $product = $db2->where('id',$order['product_id'])->getOne("products");
+                            $name= $db2->where('user',$order['user_id'])->getOne("user_profiles");
+
+                            if($order['owner']== NULL)
+                            {
+                                $link ='/admin/admin-panel-items/Orders/delivering_orders.php';
+                                $msg =  "<strong>" .$name['full_name'].'</strong> brought your product <strong>'.$product['product_name']."</strong>, The payment is confirmed, please deliver it";
+                            }else{
+                                $assocaite = $db2->where('id',$order['owner'])->getValue("associate_accounts","bussiness_name");
+                                $msg =  "<strong>" .$name['full_name'].'</strong> wants to buy a product <strong>'.$product['product_name']."</strong> from <strong> $assocaite </strong> The payment is confirmed, please deliver it";
+                                $link ='/admin/admin-panel-items/Orders/delivering_orders.php';
+
+                            }
+                            $icon ='fa fa-shopping-cart fa-fw';
+                            $class="";
+                            break;
+                    case "accepted":
+                            $product = $db2->where('id',$order['product_id'])->getOne("products");
+                            $name= $db2->where('user',$order['user_id'])->getOne("user_profiles");
+
+                            if($order['owner']== NULL)
+                            {
+                                $link ='/admin/admin-panel-items/Orders/delivering_orders.php';
+                                $msg =  "<strong>" .$name['full_name'].'</strong> booked your product <strong>'.$product['product_name']."</strong>,please wait while customer chooses the payment mode.";
+                            }else{
+                                $assocaite = $db2->where('id',$order['owner'])->getValue("associate_accounts","bussiness_name");
+                                $msg =  "<strong>" .$name['full_name'].'</strong> wants to booked a product <strong>'.$product['product_name']."</strong> from <strong> $assocaite </strong> please wait while customer chooses the payment mode?";
+                                $link ='/admin/admin-panel-items/Orders/accepted_orders.php';
 
                             }
                             $icon ='fa fa-shopping-cart fa-fw';
